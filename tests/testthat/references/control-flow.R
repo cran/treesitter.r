@@ -9,6 +9,13 @@ if (a.b) {
   d
 }
 
+if (
+  x <
+  y
+) {
+  z
+}
+
 # ------------------------------------------------------------------------------
 # if else
 
@@ -68,6 +75,45 @@ else
   }
 }
 
+# Valid. This test ensures we handle the newline after `1 + 1` correctly (#125).
+{
+  if (TRUE)
+
+    1 + 1
+}
+
+# Valid. Newlines are allowed between the `else` and the `alternative`, even at top level (#141).
+if (TRUE) {
+  1
+} else
+{
+  2
+}
+
+# Valid. Same as above but in `{ }` so it is valid no matter where the newlines are.
+{
+  if (TRUE) {
+    1
+  } else
+  {
+    2
+  }
+}
+
+# Valid. Newlines and comments are allowed between the `else` and the `alternative`, even at top level.
+if (TRUE) {
+  1
+} else
+
+# do this alternative
+{
+  2
+}
+
+# Valid. Newlines are allowed between the `else` and the `alternative`, even at top level.
+if (TRUE) 1 else
+  2
+
 # ------------------------------------------------------------------------------
 # for
 
@@ -81,6 +127,12 @@ for (x in 5:6) {
 }
 
 for (x in y) for (y in z) x + y
+
+# `...` as the `variable`
+for (... in 1:2) print(get("..."))
+
+# `..i` as the `variable`
+for (..1 in 1:2) print(get("..1"))
 
 # ------------------------------------------------------------------------------
 # for no body

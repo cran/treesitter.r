@@ -312,9 +312,9 @@
           (comma [(2, 7), (2, 8)])
           argument: (argument [(3, 2), (3, 9)]
             name: (string [(3, 2), (3, 5)]
-              "\"" [(3, 2), (3, 3)]
+              open: "\"" [(3, 2), (3, 3)]
               content: (string_content [(3, 3), (3, 4)])
-              "\"" [(3, 4), (3, 5)]
+              close: "\"" [(3, 4), (3, 5)]
             )
             "=" [(3, 6), (3, 7)]
             value: (float [(3, 8), (3, 9)])
@@ -625,9 +625,9 @@
           open: "(" [(16, 1), (16, 2)]
           argument: (argument [(16, 2), (16, 6)]
             name: (string [(16, 2), (16, 5)]
-              "\"" [(16, 2), (16, 3)]
+              open: "\"" [(16, 2), (16, 3)]
               content: (string_content [(16, 3), (16, 4)])
-              "\"" [(16, 4), (16, 5)]
+              close: "\"" [(16, 4), (16, 5)]
             )
             "=" [(16, 5), (16, 6)]
           )
@@ -640,16 +640,91 @@
       f("x"=,)
       
       S-Expression
-      (call [(17, 0), (17, 10)]
+      (call [(17, 0), (17, 6)]
         function: (identifier [(17, 0), (17, 1)])
-        arguments: (arguments [(17, 1), (17, 10)]
+        arguments: (arguments [(17, 1), (17, 6)]
           open: "(" [(17, 1), (17, 2)]
-          argument: (argument [(17, 2), (17, 7)]
-            name: (dots [(17, 2), (17, 5)])
-            "=" [(17, 6), (17, 7)]
+          (comma [(17, 2), (17, 3)])
+          argument: (argument [(17, 3), (17, 5)]
+            name: (identifier [(17, 3), (17, 4)])
+            "=" [(17, 4), (17, 5)]
           )
-          (comma [(17, 8), (17, 9)])
-          close: ")" [(17, 9), (17, 10)]
+          close: ")" [(17, 5), (17, 6)]
+        )
+      )
+      
+      Text
+      f(,y=)
+      
+      S-Expression
+      (comment [(19, 0), (19, 36)])
+      
+      Text
+      # Dots as unnamed and named argument
+      
+      S-Expression
+      (call [(20, 0), (20, 6)]
+        function: (identifier [(20, 0), (20, 1)])
+        arguments: (arguments [(20, 1), (20, 6)]
+          open: "(" [(20, 1), (20, 2)]
+          argument: (argument [(20, 2), (20, 5)]
+            value: (dots [(20, 2), (20, 5)])
+          )
+          close: ")" [(20, 5), (20, 6)]
+        )
+      )
+      
+      Text
+      f(...)
+      
+      S-Expression
+      (call [(21, 0), (21, 11)]
+        function: (identifier [(21, 0), (21, 1)])
+        arguments: (arguments [(21, 1), (21, 11)]
+          open: "(" [(21, 1), (21, 2)]
+          (comma [(21, 2), (21, 3)])
+          argument: (argument [(21, 4), (21, 7)]
+            value: (dots [(21, 4), (21, 7)])
+          )
+          (comma [(21, 7), (21, 8)])
+          argument: (argument [(21, 9), (21, 10)]
+            value: (float [(21, 9), (21, 10)])
+          )
+          close: ")" [(21, 10), (21, 11)]
+        )
+      )
+      
+      Text
+      f(, ..., 1)
+      
+      S-Expression
+      (call [(22, 0), (22, 10)]
+        function: (identifier [(22, 0), (22, 1)])
+        arguments: (arguments [(22, 1), (22, 10)]
+          open: "(" [(22, 1), (22, 2)]
+          argument: (argument [(22, 2), (22, 9)]
+            name: (dots [(22, 2), (22, 5)])
+            "=" [(22, 6), (22, 7)]
+            value: (float [(22, 8), (22, 9)])
+          )
+          close: ")" [(22, 9), (22, 10)]
+        )
+      )
+      
+      Text
+      f(... = 1)
+      
+      S-Expression
+      (call [(23, 0), (23, 10)]
+        function: (identifier [(23, 0), (23, 1)])
+        arguments: (arguments [(23, 1), (23, 10)]
+          open: "(" [(23, 1), (23, 2)]
+          argument: (argument [(23, 2), (23, 7)]
+            name: (dots [(23, 2), (23, 5)])
+            "=" [(23, 6), (23, 7)]
+          )
+          (comma [(23, 8), (23, 9)])
+          close: ")" [(23, 9), (23, 10)]
         )
       )
       
@@ -657,24 +732,377 @@
       f(... = ,)
       
       S-Expression
-      (call [(18, 0), (18, 6)]
-        function: (identifier [(18, 0), (18, 1)])
-        arguments: (arguments [(18, 1), (18, 6)]
-          open: "(" [(18, 1), (18, 2)]
-          (comma [(18, 2), (18, 3)])
-          argument: (argument [(18, 3), (18, 5)]
-            name: (identifier [(18, 3), (18, 4)])
-            "=" [(18, 4), (18, 5)]
+      (call [(24, 0), (24, 12)]
+        function: (identifier [(24, 0), (24, 1)])
+        arguments: (arguments [(24, 1), (24, 12)]
+          open: "(" [(24, 1), (24, 2)]
+          argument: (argument [(24, 2), (24, 11)]
+            name: (dots [(24, 2), (24, 5)])
+            "=" [(24, 6), (24, 7)]
+            value: (dots [(24, 8), (24, 11)])
           )
-          close: ")" [(18, 5), (18, 6)]
+          close: ")" [(24, 11), (24, 12)]
         )
       )
       
       Text
-      f(,y=)
+      f(... = ...)
+      
+      S-Expression
+      (comment [(26, 0), (26, 37)])
+      
+      Text
+      # `..i` as unnamed and named argument
+      
+      S-Expression
+      (call [(27, 0), (27, 6)]
+        function: (identifier [(27, 0), (27, 1)])
+        arguments: (arguments [(27, 1), (27, 6)]
+          open: "(" [(27, 1), (27, 2)]
+          argument: (argument [(27, 2), (27, 5)]
+            value: (dot_dot_i [(27, 2), (27, 5)])
+          )
+          close: ")" [(27, 5), (27, 6)]
+        )
+      )
+      
+      Text
+      f(..1)
+      
+      S-Expression
+      (call [(28, 0), (28, 11)]
+        function: (identifier [(28, 0), (28, 1)])
+        arguments: (arguments [(28, 1), (28, 11)]
+          open: "(" [(28, 1), (28, 2)]
+          (comma [(28, 2), (28, 3)])
+          argument: (argument [(28, 4), (28, 7)]
+            value: (dot_dot_i [(28, 4), (28, 7)])
+          )
+          (comma [(28, 7), (28, 8)])
+          argument: (argument [(28, 9), (28, 10)]
+            value: (float [(28, 9), (28, 10)])
+          )
+          close: ")" [(28, 10), (28, 11)]
+        )
+      )
+      
+      Text
+      f(, ..1, 1)
+      
+      S-Expression
+      (call [(29, 0), (29, 10)]
+        function: (identifier [(29, 0), (29, 1)])
+        arguments: (arguments [(29, 1), (29, 10)]
+          open: "(" [(29, 1), (29, 2)]
+          argument: (argument [(29, 2), (29, 9)]
+            name: (dot_dot_i [(29, 2), (29, 5)])
+            "=" [(29, 6), (29, 7)]
+            value: (float [(29, 8), (29, 9)])
+          )
+          close: ")" [(29, 9), (29, 10)]
+        )
+      )
+      
+      Text
+      f(..1 = 1)
+      
+      S-Expression
+      (call [(30, 0), (30, 10)]
+        function: (identifier [(30, 0), (30, 1)])
+        arguments: (arguments [(30, 1), (30, 10)]
+          open: "(" [(30, 1), (30, 2)]
+          argument: (argument [(30, 2), (30, 7)]
+            name: (dot_dot_i [(30, 2), (30, 5)])
+            "=" [(30, 6), (30, 7)]
+          )
+          (comma [(30, 8), (30, 9)])
+          close: ")" [(30, 9), (30, 10)]
+        )
+      )
+      
+      Text
+      f(..1 = ,)
+      
+      S-Expression
+      (call [(31, 0), (31, 12)]
+        function: (identifier [(31, 0), (31, 1)])
+        arguments: (arguments [(31, 1), (31, 12)]
+          open: "(" [(31, 1), (31, 2)]
+          argument: (argument [(31, 2), (31, 11)]
+            name: (dot_dot_i [(31, 2), (31, 5)])
+            "=" [(31, 6), (31, 7)]
+            value: (dot_dot_i [(31, 8), (31, 11)])
+          )
+          close: ")" [(31, 11), (31, 12)]
+        )
+      )
+      
+      Text
+      f(..1 = ..1)
       
 
-# braces
+# not a call, subset, or subset2
+
+    Code
+      node_children_print(node)
+    Output
+      S-Expression
+      (identifier [(1, 0), (1, 1)])
+      
+      Text
+      f
+      
+      S-Expression
+      (parenthesized_expression [(2, 0), (2, 3)]
+        open: "(" [(2, 0), (2, 1)]
+        body: (identifier [(2, 1), (2, 2)])
+        close: ")" [(2, 2), (2, 3)]
+      )
+      
+      Text
+      (x)
+      
+      S-Expression
+      (identifier [(4, 0), (4, 3)])
+      
+      Text
+      foo
+      
+      S-Expression
+      (ERROR [(5, 0), (5, 1)]
+        (ERROR [(5, 0), (5, 1)])
+      )
+      
+      Text
+      [
+      
+      S-Expression
+      (identifier [(5, 1), (5, 4)])
+      
+      Text
+      bar
+      
+      S-Expression
+      (ERROR [(5, 4), (5, 5)]
+        (ERROR [(5, 4), (5, 5)])
+      )
+      
+      Text
+      ]
+      
+      S-Expression
+      (identifier [(7, 0), (7, 3)])
+      
+      Text
+      foo
+      
+      S-Expression
+      (ERROR [(8, 0), (8, 2)]
+        (ERROR [(8, 0), (8, 2)])
+      )
+      
+      Text
+      [[
+      
+      S-Expression
+      (identifier [(8, 2), (8, 3)])
+      
+      Text
+      x
+      
+      S-Expression
+      (ERROR [(8, 3), (8, 5)]
+        (ERROR [(8, 3), (8, 5)])
+      )
+      
+      Text
+      ]]
+      
+
+# not a call, subset, or subset2 due to sequential arguments
+
+    Code
+      node_children_print(node)
+    Output
+      S-Expression
+      (call [(1, 0), (1, 6)]
+        function: (identifier [(1, 0), (1, 1)])
+        arguments: (arguments [(1, 1), (1, 6)]
+          open: "(" [(1, 1), (1, 2)]
+          (ERROR [(1, 2), (1, 3)]
+            (identifier [(1, 2), (1, 3)])
+          )
+          argument: (argument [(1, 4), (1, 5)]
+            value: (identifier [(1, 4), (1, 5)])
+          )
+          close: ")" [(1, 5), (1, 6)]
+        )
+      )
+      
+      Text
+      f(x y)
+      
+      S-Expression
+      (subset [(2, 0), (2, 8)]
+        function: (identifier [(2, 0), (2, 3)])
+        arguments: (arguments [(2, 3), (2, 8)]
+          open: "[" [(2, 3), (2, 4)]
+          (ERROR [(2, 4), (2, 5)]
+            (identifier [(2, 4), (2, 5)])
+          )
+          argument: (argument [(2, 6), (2, 7)]
+            value: (identifier [(2, 6), (2, 7)])
+          )
+          close: "]" [(2, 7), (2, 8)]
+        )
+      )
+      
+      Text
+      foo[x y]
+      
+      S-Expression
+      (subset2 [(3, 0), (3, 10)]
+        function: (identifier [(3, 0), (3, 3)])
+        arguments: (arguments [(3, 3), (3, 10)]
+          open: "[[" [(3, 3), (3, 5)]
+          (ERROR [(3, 5), (3, 6)]
+            (identifier [(3, 5), (3, 6)])
+          )
+          argument: (argument [(3, 7), (3, 8)]
+            value: (identifier [(3, 7), (3, 8)])
+          )
+          close: "]]" [(3, 8), (3, 10)]
+        )
+      )
+      
+      Text
+      foo[[x y]]
+      
+      S-Expression
+      (call [(5, 0), (5, 9)]
+        function: (identifier [(5, 0), (5, 1)])
+        arguments: (arguments [(5, 1), (5, 9)]
+          open: "(" [(5, 1), (5, 2)]
+          argument: (argument [(5, 2), (5, 3)]
+            value: (identifier [(5, 2), (5, 3)])
+          )
+          (comma [(5, 3), (5, 4)])
+          (ERROR [(5, 5), (5, 6)]
+            (identifier [(5, 5), (5, 6)])
+          )
+          argument: (argument [(5, 7), (5, 8)]
+            value: (identifier [(5, 7), (5, 8)])
+          )
+          close: ")" [(5, 8), (5, 9)]
+        )
+      )
+      
+      Text
+      f(x, y z)
+      
+      S-Expression
+      (subset [(6, 0), (6, 11)]
+        function: (identifier [(6, 0), (6, 3)])
+        arguments: (arguments [(6, 3), (6, 11)]
+          open: "[" [(6, 3), (6, 4)]
+          argument: (argument [(6, 4), (6, 5)]
+            value: (identifier [(6, 4), (6, 5)])
+          )
+          (comma [(6, 5), (6, 6)])
+          (ERROR [(6, 7), (6, 8)]
+            (identifier [(6, 7), (6, 8)])
+          )
+          argument: (argument [(6, 9), (6, 10)]
+            value: (identifier [(6, 9), (6, 10)])
+          )
+          close: "]" [(6, 10), (6, 11)]
+        )
+      )
+      
+      Text
+      foo[x, y z]
+      
+      S-Expression
+      (subset2 [(7, 0), (7, 13)]
+        function: (identifier [(7, 0), (7, 3)])
+        arguments: (arguments [(7, 3), (7, 13)]
+          open: "[[" [(7, 3), (7, 5)]
+          argument: (argument [(7, 5), (7, 6)]
+            value: (identifier [(7, 5), (7, 6)])
+          )
+          (comma [(7, 6), (7, 7)])
+          (ERROR [(7, 8), (7, 9)]
+            (identifier [(7, 8), (7, 9)])
+          )
+          argument: (argument [(7, 10), (7, 11)]
+            value: (identifier [(7, 10), (7, 11)])
+          )
+          close: "]]" [(7, 11), (7, 13)]
+        )
+      )
+      
+      Text
+      foo[[x, y z]]
+      
+      S-Expression
+      (call [(9, 0), (9, 8)]
+        function: (identifier [(9, 0), (9, 1)])
+        arguments: (arguments [(9, 1), (9, 8)]
+          open: "(" [(9, 1), (9, 2)]
+          (comma [(9, 2), (9, 3)])
+          (ERROR [(9, 4), (9, 5)]
+            (identifier [(9, 4), (9, 5)])
+          )
+          argument: (argument [(9, 6), (9, 7)]
+            value: (identifier [(9, 6), (9, 7)])
+          )
+          close: ")" [(9, 7), (9, 8)]
+        )
+      )
+      
+      Text
+      f(, x y)
+      
+      S-Expression
+      (subset [(10, 0), (10, 10)]
+        function: (identifier [(10, 0), (10, 3)])
+        arguments: (arguments [(10, 3), (10, 10)]
+          open: "[" [(10, 3), (10, 4)]
+          (comma [(10, 4), (10, 5)])
+          (ERROR [(10, 6), (10, 7)]
+            (identifier [(10, 6), (10, 7)])
+          )
+          argument: (argument [(10, 8), (10, 9)]
+            value: (identifier [(10, 8), (10, 9)])
+          )
+          close: "]" [(10, 9), (10, 10)]
+        )
+      )
+      
+      Text
+      foo[, x y]
+      
+      S-Expression
+      (subset2 [(11, 0), (11, 12)]
+        function: (identifier [(11, 0), (11, 3)])
+        arguments: (arguments [(11, 3), (11, 12)]
+          open: "[[" [(11, 3), (11, 5)]
+          (comma [(11, 5), (11, 6)])
+          (ERROR [(11, 7), (11, 8)]
+            (identifier [(11, 7), (11, 8)])
+          )
+          argument: (argument [(11, 9), (11, 10)]
+            value: (identifier [(11, 9), (11, 10)])
+          )
+          close: "]]" [(11, 10), (11, 12)]
+        )
+      )
+      
+      Text
+      foo[[, x y]]
+      
+
+# braced expression
 
     Code
       node_children_print(node)
@@ -769,5 +1197,176 @@
       2
         3
       }
+      
+
+# parenthesized expression
+
+    Code
+      node_children_print(node)
+    Output
+      S-Expression
+      (parenthesized_expression [(1, 0), (1, 3)]
+        open: "(" [(1, 0), (1, 1)]
+        body: (float [(1, 1), (1, 2)])
+        close: ")" [(1, 2), (1, 3)]
+      )
+      
+      Text
+      (1)
+      
+      S-Expression
+      (parenthesized_expression [(2, 0), (2, 5)]
+        open: "(" [(2, 0), (2, 1)]
+        body: (parenthesized_expression [(2, 1), (2, 4)]
+          open: "(" [(2, 1), (2, 2)]
+          body: (float [(2, 2), (2, 3)])
+          close: ")" [(2, 3), (2, 4)]
+        )
+        close: ")" [(2, 4), (2, 5)]
+      )
+      
+      Text
+      ((1))
+      
+      S-Expression
+      (parenthesized_expression [(3, 0), (3, 7)]
+        open: "(" [(3, 0), (3, 1)]
+        body: (binary_operator [(3, 1), (3, 6)]
+          lhs: (float [(3, 1), (3, 2)])
+          operator: "+" [(3, 3), (3, 4)]
+          rhs: (float [(3, 5), (3, 6)])
+        )
+        close: ")" [(3, 6), (3, 7)]
+      )
+      
+      Text
+      (1 + 1)
+      
+      S-Expression
+      (parenthesized_expression [(4, 0), (4, 10)]
+        open: "(" [(4, 0), (4, 1)]
+        body: (call [(4, 1), (4, 9)]
+          function: (identifier [(4, 1), (4, 3)])
+          arguments: (arguments [(4, 3), (4, 9)]
+            open: "(" [(4, 3), (4, 4)]
+            argument: (argument [(4, 4), (4, 5)]
+              value: (identifier [(4, 4), (4, 5)])
+            )
+            (comma [(4, 5), (4, 6)])
+            argument: (argument [(4, 7), (4, 8)]
+              value: (identifier [(4, 7), (4, 8)])
+            )
+            close: ")" [(4, 8), (4, 9)]
+          )
+        )
+        close: ")" [(4, 9), (4, 10)]
+      )
+      
+      Text
+      (fn(a, b))
+      
+      S-Expression
+      (call [(5, 0), (5, 12)]
+        function: (identifier [(5, 0), (5, 2)])
+        arguments: (arguments [(5, 2), (5, 12)]
+          open: "(" [(5, 2), (5, 3)]
+          argument: (argument [(5, 3), (5, 6)]
+            value: (parenthesized_expression [(5, 3), (5, 6)]
+              open: "(" [(5, 3), (5, 4)]
+              body: (identifier [(5, 4), (5, 5)])
+              close: ")" [(5, 5), (5, 6)]
+            )
+          )
+          (comma [(5, 6), (5, 7)])
+          argument: (argument [(5, 8), (5, 11)]
+            value: (parenthesized_expression [(5, 8), (5, 11)]
+              open: "(" [(5, 8), (5, 9)]
+              body: (identifier [(5, 9), (5, 10)])
+              close: ")" [(5, 10), (5, 11)]
+            )
+          )
+          close: ")" [(5, 11), (5, 12)]
+        )
+      )
+      
+      Text
+      fn((a), (b))
+      
+      S-Expression
+      (parenthesized_expression [(6, 0), (8, 2)]
+        open: "(" [(6, 0), (6, 1)]
+        body: (function_definition [(6, 1), (8, 1)]
+          name: "function" [(6, 1), (6, 9)]
+          parameters: (parameters [(6, 9), (6, 11)]
+            open: "(" [(6, 9), (6, 10)]
+            close: ")" [(6, 10), (6, 11)]
+          )
+          body: (braced_expression [(6, 12), (8, 1)]
+            open: "{" [(6, 12), (6, 13)]
+            body: (identifier [(7, 2), (7, 6)])
+            close: "}" [(8, 0), (8, 1)]
+          )
+        )
+        close: ")" [(8, 1), (8, 2)]
+      )
+      
+      Text
+      (function() {
+        body
+      })
+      
+
+# not a parenthesized expression 1
+
+    Code
+      node_children_print(node)
+    Output
+      S-Expression
+      (ERROR [(1, 0), (1, 2)]
+        "(" [(1, 0), (1, 1)]
+        (ERROR [(1, 1), (1, 2)])
+      )
+      
+      Text
+      ()
+      
+
+# not a parenthesized expression 2
+
+    Code
+      node_children_print(node)
+    Output
+      S-Expression
+      (parenthesized_expression [(1, 0), (4, 1)]
+        open: "(" [(1, 0), (1, 1)]
+        (ERROR [(2, 2), (2, 3)])
+        body: (float [(3, 2), (3, 3)])
+        close: ")" [(4, 0), (4, 1)]
+      )
+      
+      Text
+      (
+        1
+        2
+      )
+      
+
+# not a parenthesized expression 3
+
+    Code
+      node_children_print(node)
+    Output
+      S-Expression
+      (parenthesized_expression [(1, 0), (1, 6)]
+        open: "(" [(1, 0), (1, 1)]
+        (ERROR [(1, 1), (1, 3)]
+          (ERROR [(1, 2), (1, 3)])
+        )
+        body: (float [(1, 4), (1, 5)])
+        close: ")" [(1, 5), (1, 6)]
+      )
+      
+      Text
+      (1; 2)
       
 
