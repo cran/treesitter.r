@@ -312,9 +312,9 @@
           (comma [(2, 7), (2, 8)])
           argument: (argument [(3, 2), (3, 9)]
             name: (string [(3, 2), (3, 5)]
-              open: "\"" [(3, 2), (3, 3)]
+              open: (string_open [(3, 2), (3, 3)])
               content: (string_content [(3, 3), (3, 4)])
-              close: "\"" [(3, 4), (3, 5)]
+              close: (string_close [(3, 4), (3, 5)])
             )
             "=" [(3, 6), (3, 7)]
             value: (float [(3, 8), (3, 9)])
@@ -625,9 +625,9 @@
           open: "(" [(16, 1), (16, 2)]
           argument: (argument [(16, 2), (16, 6)]
             name: (string [(16, 2), (16, 5)]
-              open: "\"" [(16, 2), (16, 3)]
+              open: (string_open [(16, 2), (16, 3)])
               content: (string_content [(16, 3), (16, 4)])
-              close: "\"" [(16, 4), (16, 5)]
+              close: (string_close [(16, 4), (16, 5)])
             )
             "=" [(16, 5), (16, 6)]
           )
@@ -839,6 +839,45 @@
       
       Text
       f(..1 = ..1)
+      
+
+# calls with `return` as argument name
+
+    Code
+      node_children_print(node)
+    Output
+      S-Expression
+      (call [(1, 0), (1, 17)]
+        function: (identifier [(1, 0), (1, 2)])
+        arguments: (arguments [(1, 2), (1, 17)]
+          open: "(" [(1, 2), (1, 3)]
+          argument: (argument [(1, 3), (1, 16)]
+            name: (identifier [(1, 3), (1, 9)])
+            "=" [(1, 10), (1, 11)]
+            value: (true [(1, 12), (1, 16)])
+          )
+          close: ")" [(1, 16), (1, 17)]
+        )
+      )
+      
+      Text
+      fn(return = TRUE)
+      
+      S-Expression
+      (call [(2, 0), (2, 13)]
+        function: (identifier [(2, 0), (2, 2)])
+        arguments: (arguments [(2, 2), (2, 13)]
+          open: "(" [(2, 2), (2, 3)]
+          argument: (argument [(2, 3), (2, 11)]
+            name: (identifier [(2, 3), (2, 9)])
+            "=" [(2, 10), (2, 11)]
+          )
+          close: ")" [(2, 12), (2, 13)]
+        )
+      )
+      
+      Text
+      fn(return = )
       
 
 # not a call, subset, or subset2
